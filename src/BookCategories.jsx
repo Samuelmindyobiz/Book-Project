@@ -1,13 +1,6 @@
+const BookCategories = (props) => {
+  console.log(props);
+  return <h1>{props.name}</h1>;
+};
 
-
-
-const BookCategories = () => {
-
-
-
-    return (
-        <h1>Book Categories</h1>
-    )
-}
-
-export default BookCategories
+export default BookCategories;
