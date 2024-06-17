@@ -1,17 +1,36 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
+import BookCategories from './BookCategories.jsx'
 
 function App() {
   const [data, setData] = useState([]);
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(null)
+
+
 
   const fetchData = async () => {
-    const response = await axios.get(
-      'https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key='
-    );
+    try {
+      const response = await axios.get(
+        `https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=${import.meta.env.VITE_BOOK_API}`
+      );
 
-    setData(response);
-    console.log(response.data.results);
+
+      setData(response.data.results);
+      console.log(response.data.results);
+
+    }
+
+    catch (err) {
+      setError(error)
+    }
+
+    finally {
+      setLoading(false)
+    }
+
+
   };
 
   useEffect(() => {
@@ -19,7 +38,25 @@ function App() {
     fetchData();
   }, []);
 
-  return <>Hello there</>;
+  console.log(data)
+
+  const bookLists = data?.lists.map((bookList) => {
+    // console.log(bookList.display_name)
+
+    return (
+      <BookCategories name={bookList.display_name} />
+    )
+  })
+
+  return (
+    <>Hello there
+
+      <BookCategories />
+      {bookLists}
+
+    </>
+
+  )
 }
 
 export default App;
