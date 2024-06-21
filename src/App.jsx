@@ -11,8 +11,7 @@ function App() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=${
-          import.meta.env.VITE_BOOK_API
+        `https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=${import.meta.env.VITE_BOOK_API
         }`
       );
 
@@ -29,12 +28,12 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(data);
+
 
   const bookLists = data.map((bookList) => {
-    console.log(bookList)
 
-    return <BookCategories name={bookList.display_name} key={bookList.id} steve='12' />;
+
+    return <BookCategories name={bookList.display_name} key={bookList.id} books={bookList.books} />;
   });
 
   return (
