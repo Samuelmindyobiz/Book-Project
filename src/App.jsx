@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './App.css';
+
 import BookCategories from './BookCategories.jsx';
 
 function App() {
@@ -28,18 +28,18 @@ function App() {
     fetchData();
   }, []);
 
+  if (loading) return <p>Loading...</p>
 
 
-  const bookLists = data.map((bookList) => {
+
+  const bookLists = data.map((bookList, index) => {
 
 
-    return <BookCategories name={bookList.display_name} key={bookList.id} books={bookList.books} />;
+    return <BookCategories name={bookList.display_name} key={index} books={bookList.books} />;
   });
 
   return (
     <>
-      Hello there
-      <BookCategories />
       {bookLists}
     </>
   );
