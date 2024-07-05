@@ -1,18 +1,18 @@
-import { useContext } from 'react';
-import BookCategories from './BookCategories.jsx';
-import { BookContext } from './context/BookContext.jsx';
+import { Route, Routes } from 'react-router-dom';
+import Favs from './components/Favs';
+import Home from './components/Home';
+import Navigation from './components/Navigation';
 
-function App() {
-  let { data, loading } = useContext(BookContext);
-  if (loading) return <p>Loading...</p>;
-
-  const bookLists = data.map((bookList, index) => {
-    return (
-      <BookCategories name={bookList.display_name} key={index} books={bookList.books} />
-    );
-  });
-
-  return <>{bookLists}</>;
-}
+const App = () => {
+  return (
+    <div className='App'>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/favs' element={<Favs />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;

@@ -1,0 +1,5 @@
+const Favs = () => {
+  return <div>FAVS</div>;
+};
+
+export default Favs;
