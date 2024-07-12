@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import { BookContext } from '../context/BookContext';
 import BookCategories from './BookCategories';
+import Hero from './Hero';
 
 const Home = () => {
   let { data, loading } = useContext(BookContext);
+
   if (loading) return <p>Loading...</p>;
 
   const bookLists = data.map((bookList, index) => {
@@ -12,7 +14,12 @@ const Home = () => {
     );
   });
 
-  return <>{bookLists}</>;
+  return (
+    <>
+      <Hero />
+      {bookLists}
+    </>
+  )
 };
 
 export default Home;
